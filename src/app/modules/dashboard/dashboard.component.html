@@ -1,0 +1,23 @@
+
+
+
+
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <ul style="list-style: none;">
+        <li>
+          Alumnos
+        </li>
+        <li>Cursos</li>
+      </ul>
+    </mat-drawer>
+  
+
+    <div class="example-sidenav-content">
+      <app-toolbar (drawerToggle)="drawer.toggle()"/>
+      <main>
+        <app-students/> 
+      </main>
+    </div>
+  
+  </mat-drawer-container>

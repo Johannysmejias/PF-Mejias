@@ -39,7 +39,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.scss",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },
@@ -98,6 +100,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -105,5 +108,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "27436647-6479-414d-b4e4-cca6e2665c9f"
   }
 }
