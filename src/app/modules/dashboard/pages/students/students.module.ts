@@ -7,13 +7,22 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import { SharedModule } from '../../../../shared/shared.module';
+import { StudentDialogFormComponent } from './components/student-dialog-form/student-dialog-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
+
 
 
 
 
 @NgModule({
   declarations: [
-    StudentsComponent
+    StudentsComponent,
+    StudentDialogFormComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +30,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatIconModule,
+    SharedModule,
+    MatDialogModule
   ],
   exports:[StudentsComponent]
 })
