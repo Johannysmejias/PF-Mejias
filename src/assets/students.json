@@ -1,0 +1,38 @@
+[
+    {
+      "id": "A1B2C3",
+      "name": "Laura",
+      "lastName": "Diaz",
+      "age": 22,
+      "email": "lauradiaz@gmail.com"
+    },
+    {
+      "id": "D4E5F6",
+      "name": "Diego",
+      "lastName": "Gonzalez",
+      "age": 21,
+      "email": "dgonzalez@gmail.com"
+    },
+    {
+      "id": "G7H8I9",
+      "name": "Sofia",
+      "lastName": "Vargas",
+      "age": 24,
+      "email": "sofi@gmail.com"
+    },
+    {
+      "id": "J1K2L3",
+      "name": "Carlos",
+      "lastName": "Gonzalez",
+      "age": 30,
+      "email": "carlos.gonzalez@gmail.com"
+    },
+    {
+      "id": "M4N5O6",
+      "name": "Maria",
+      "lastName": "Lopez",
+      "age": 28,
+      "email": "maria.lopez@gmail.com"
+    }
+  ]
+  

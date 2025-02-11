@@ -1,0 +1,12 @@
+<mat-nav-list>
+    <a *ngFor="let item of menuItems" 
+    [routerLink]="item.path" 
+    routerLinkActive 
+    #link="routerLinkActive" 
+    [activated]="link.isActive" 
+    mat-list-item>
+   {{ item.label }}
+ </a>
+ <a mat-list-item (click)="logout()"> Cerrar sesión</a>
+
+  </mat-nav-list>

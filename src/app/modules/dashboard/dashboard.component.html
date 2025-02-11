@@ -4,19 +4,14 @@
 
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <ul style="list-style: none;">
-        <li>
-          Students
-        </li>
-        <li>Courses</li>
-      </ul>
+      <app-nav-menu></app-nav-menu>
     </mat-drawer>
   
 
     <div class="example-sidenav-content">
       <app-toolbar (drawerToggle)="drawer.toggle()"/>
       <main>
-        <app-students/> 
+        <router-outlet></router-outlet>
       </main>
     </div>
   

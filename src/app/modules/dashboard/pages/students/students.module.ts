@@ -12,6 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { SharedModule } from '../../../../shared/shared.module';
 import { StudentDialogFormComponent } from './components/student-dialog-form/student-dialog-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -34,7 +35,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatIconModule,
     SharedModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   exports:[StudentsComponent]
 })

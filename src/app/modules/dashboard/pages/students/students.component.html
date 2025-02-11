@@ -1,4 +1,10 @@
-<h1 appTitleSize>Estudiantes</h1>
+@if (isLoading) {
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary" diameter="50"></mat-progress-spinner>
+}@else {
+  @if (hasError) {
+    <p> Ocurrió un error vuelva a intentarlo</p>
+  }@else {
+    <h1 appTitleSize>Estudiantes</h1>
 <button mat-flat-button (click)="onCreateStudent()" style="margin-top: 1rem;">
     Add student
 </button>
@@ -40,11 +46,25 @@
             <button mat-icon-button (click)="onEdit(element)">
                 <mat-icon>edit</mat-icon>
             </button>
+            <button mat-icon-button (click)="getStudentDetails(element.id)">
+              <mat-icon>visibility</mat-icon>
+          </button>
         </td>
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  
+  <div *ngIf="selectedStudent" class="mat-elevation-z4 p-4 mt-4">
+    <h2>Detalles del estudiante</h2>
+    <p><strong>ID</strong>{{selectedStudent.id}}</p>
+    <p><strong>Nombre</strong>{{selectedStudent.name}}</p>
+    <p><strong>Aperllido</strong>{{selectedStudent.lastName}}</p>
+  </div>
+  }
+}
+
+
   
 

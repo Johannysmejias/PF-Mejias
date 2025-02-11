@@ -1,0 +1,8 @@
+[
+    { "id": "A1B2C3", "name": "Introducción a la Programación", "teacher": "Carlos Pérez" },
+    { "id": "D4E5F6", "name": "Desarrollo Web con Angular", "teacher": "María Gómez" },
+    { "id": "G7H8I9", "name": "Machine Learning Básico", "teacher": "Ana Rodríguez" },
+    { "id": "J1K2L3", "name": "Bases de Datos SQL", "teacher": "Luis Fernández" },
+    { "id": "M4N5O6", "name": "Análisis de Datos con Python", "teacher": "Javier López" }
+  ]
+  

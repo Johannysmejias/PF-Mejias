@@ -1,0 +1,51 @@
+@if (isLoading) {
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary" diameter="50"></mat-progress-spinner>
+}@else{
+  @if (hasError) {
+    <p> Ocurrió un error vuelva a intentarlo</p>
+  }@else {
+    <h1 appTitleSize>Cursos</h1>
+<button mat-flat-button (click)="onCreateCourse()" style="margin-top: 1rem;">
+    Add course
+</button>
+
+
+<table mat-table [dataSource]="courses" class="mat-elevation-z8">
+  
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef appTitleSize> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef appTitleSize> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="teacher">
+      <th mat-header-cell *matHeaderCellDef appTitleSize> Teacher </th>
+      <td mat-cell *matCellDef="let element"> {{element.teacher}} </td>
+    </ng-container>
+
+    <!-- actions Column -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef appTitleSize> Actions </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button (click)="onDelete(element.id)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  }
+}
+

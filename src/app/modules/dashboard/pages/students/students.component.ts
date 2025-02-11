@@ -1,87 +1,72 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Student } from './models/index';
 import { generateRandomString } from '../../../../shared/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentDialogFormComponent } from './components/student-dialog-form/student-dialog-form.component';
+import { StudentsService } from '../../../../core/services/students.service';
+import { interval } from 'rxjs/internal/observable/interval';
+import { Observable, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-students',
   standalone: false,
-  
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss'
 })
 
-export class StudentsComponent {
+export class StudentsComponent  implements OnInit{
 
   
   displayedColumns: string[] = ['ID', 'name', 'age', 'email', 'actions'];
-  students : Student[] = [ 
-    {id:generateRandomString(6),
-    name: "Laura",
-    lastName: "Diaz",
-    age: 22,
-    email: "lauradiaz@gmail.com"},
-    {id:generateRandomString(6),
-    name: "Diego",
-    lastName: "Gonzalez",
-    age: 21,
-    email: "dgonzalez@gmail.com"},
-    {id:generateRandomString(6),
-    name: "Sofia",
-    lastName: "Vargas",
-    age: 24,
-    email: "sofi@gmail.com"},
-    {
-      id: generateRandomString(6),
-      name: "Carlos",
-      lastName: "Gonzalez",
-      age: 30,
-      email: "carlos.gonzalez@gmail.com"
-    },
-    {
-      id: generateRandomString(6),
-      name: "Maria",
-      lastName: "Lopez",
-      age: 28,
-      email: "maria.lopez@gmail.com"
-    },
-    {
-      id: generateRandomString(6),
-      name: "Luis",
-      lastName: "Fernandez",
-      age: 35,
-      email: "luis.fernandez@gmail.com"
-    },
-    {
-      id: generateRandomString(6),
-      name: "Elena",
-      lastName: "Martinez",
-      age: 24,
-      email: "elena.martinez@gmail.com"
-    },
-    {
-      id: generateRandomString(6),
-      name: "Jose",
-      lastName: "Perez",
-      age: 32,
-      email: "jose.perez@gmail.com"
-    }
-  ]
-
   editingStudentId: string | null = null;
 
-  constructor( private matDialog: MatDialog){
+  students:Student[] = [];
+  selectedStudent: any;
+  isLoading = true;
+  hasError = false;
+  studentsSubscription?: Subscription;
+  myInterval$ = interval(1000);
+
+
+  constructor( private matDialog: MatDialog, private StudentsService : StudentsService){}
+
+  ngOnInit(): void {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.studentsSubscription = this.StudentsService.getStudents().subscribe({
+      next: (data) => {
+        this.students = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error("Error al obtener estudiantes:", err);
+        this.isLoading = false;
+      }
+    });
+
+    // Suscribirse a myInterval$
+    this.myInterval$.subscribe((value) => {
+      console.log(`Intervalo: ${value}`);
+    });
+  
+    }, 2000);
     
   }
-
   
+  ngOnDestroy(): void {
+    this.studentsSubscription?.unsubscribe();
+  }
 
   onDelete(id:string){
     if(confirm("Estás seguro?")){
-      this.students = this.students.filter((el)=> el.id != id)
+      this.students = this.students.filter(student => student.id !== id)
     }
+  }
+
+  getStudentDetails(id: string){
+    this.StudentsService.getStudentById(id).subscribe(student => {
+      this.selectedStudent = student;
+    })
   }
 
   onEdit(student: Student): void {

@@ -1,0 +1,19 @@
+<h1 mat-dialog-title> {{ isEditing ? "Editing Course" : "Create Course" }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="coursesForm">
+    <div class="grid">
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Course Name</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Teacher</mat-label>
+          <input formControlName="teacher" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
