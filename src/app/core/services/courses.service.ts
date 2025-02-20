@@ -32,7 +32,7 @@ export class CoursesService {
 
             subscriber.next([...courses]);  
 
-            // Finalizar cuando se hayan agregado 3 cursos
+            
             if (courses.length === coursesFromJson.length + 3) {
               clearInterval(intervalId);  
               subscriber.complete();  
