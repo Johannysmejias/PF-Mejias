@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { StudentDialogFormComponent } from './components/student-dialog-form/student-dialog-form.component';
 import { StudentsService } from '../../../../core/services/students.service';
 import { interval } from 'rxjs/internal/observable/interval';
-import { Observable, Subscription, take } from 'rxjs';
+import {  Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -19,7 +19,6 @@ export class StudentsComponent  implements OnInit{
   
   displayedColumns: string[] = ['ID', 'name', 'age', 'email', 'actions'];
   editingStudentId: string | null = null;
-
   students:Student[] = [];
   selectedStudent: any;
   isLoading = true;
@@ -43,8 +42,7 @@ export class StudentsComponent  implements OnInit{
         this.isLoading = false;
       }
     });
-
-    // Suscribirse a myInterval$
+  
     this.myInterval$.subscribe((value) => {
       console.log(`Intervalo: ${value}`);
     });

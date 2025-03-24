@@ -10,10 +10,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { TeachersDialogFormComponent } from './pages/course-detail/components/teachers-dialog-form/teachers-dialog-form.component';
 @NgModule({
   declarations: [
     CoursesComponent,
-    CourseDialogFormComponent
+    CourseDialogFormComponent,
+    CourseDetailComponent,
+    TeachersDialogFormComponent
   ],
   imports: [
     CommonModule,

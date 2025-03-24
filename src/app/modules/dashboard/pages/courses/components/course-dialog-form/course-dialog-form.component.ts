@@ -30,7 +30,6 @@ export class CourseDialogFormComponent {
       this.isEditing = true;
       this.coursesForm.patchValue({
         name: data.name,
-        teacher: data.teacher
       });
     }
   }

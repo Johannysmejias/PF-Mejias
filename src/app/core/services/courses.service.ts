@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { concatMap, map, Observable } from 'rxjs';
 import { Course } from '../../modules/dashboard/pages/courses/models';  
-import { generateRandomString } from '../../shared/utils';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,43 +12,32 @@ export class CoursesService {
   deleteCourse: any;
 
   constructor(
-    private http: HttpClient
+    private httpClient: HttpClient
   ) { }
 
-  getCourses(): Observable<Course[]> {
-    return new Observable<Course[]>((subscriber) => {
-      this.http.get<Course[]>(this.courseUrl).subscribe({
-        next: (coursesFromJson) => {
-          const courses = [...coursesFromJson]; 
-          subscriber.next([...courses]);  
-
-       
-          const intervalId = setInterval(() => {
-            courses.push({
-              id: generateRandomString(6), 
-              name: 'Nuevo Curso ' + (courses.length + 1),  
-              teacher: 'Profesor ' + (courses.length + 1),  
-            });
-
-            subscriber.next([...courses]);  
-
-            
-            if (courses.length === coursesFromJson.length + 3) {
-              clearInterval(intervalId);  
-              subscriber.complete();  
-            }
-          }, 1000);
-        },
-        error: (err) => {
-          subscriber.error('Error al cargar cursos desde el JSON: ' + err);
-        },
-      });
-    });
+  getCourseDetail(id:string):Observable<Course>{
+    return this.httpClient.get<Course>(`${environment.baseApiUrl}/courses/${id}?embed=teachers`)
+  }
+  addCourse(payload:{name: string}):Observable<Course[]>{
+    return this.httpClient.post<Course>(`${environment.baseApiUrl}/courses`, payload).pipe(concatMap(() => this.getCourses()))
   }
 
+  getCourses(): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${environment.baseApiUrl}/courses/`)
+  }
+
+
   getCourseById(id: string): Observable<any> {
-    return this.http.get<any[]>(this.courseUrl).pipe(
-      map(courses => courses.find(course => course.id === id))  // Buscar el curso por ID
+    return this.httpClient.get<any[]>(this.courseUrl).pipe(
+      map(courses => courses.find(course => course.id === id))  
     );
+  }
+
+  updateCourseById(id:string, data: {name: string}): Observable<Course[]>{
+    return this.httpClient.patch<Course>(`${environment.baseApiUrl}/courses/${id}`, data).pipe(concatMap(() => this.getCourses()))
+  }
+
+  deleteCourseById(id: string):Observable<Course[]>{
+    return this.httpClient.delete(`${environment.baseApiUrl}/courses/${id}`).pipe(concatMap(() => this.getCourses()))
   }
 }

@@ -1,0 +1,36 @@
+{
+  "courses": [
+    {
+      "id": "A1B2C",
+      "name": "Introducción a la Programación"
+      
+    },
+    {
+      "id": "D4E5F",
+      "name": "Desarrollo Web con Angular"
+      
+    },
+    {
+      "id": "G7H8I",
+      "name": "Data Science"
+      
+    },
+    {
+      "id": "J1K2L",
+      "name": "Bases de Datos SQL"
+      
+    },
+    {
+      "id": "M4N5O",
+      "name": "Análisis de Datos con Python"
+      
+    }
+  ],
+  "teachers":[
+    {
+      "id": "bcwuvi",
+      "name": "Johannys Mejías",
+      "courseId": "M4N5O"
+    }
+  ]
+}

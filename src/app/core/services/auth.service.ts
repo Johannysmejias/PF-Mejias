@@ -11,6 +11,7 @@ const FAKE_USERS_DB: User[]=[
     name: "Admin",
     email: "admin@gmail.com",
     password: "123456",
+    accessToken: "dgyfbf1",
     role: "ADMIN"
 },
 {
@@ -18,6 +19,7 @@ const FAKE_USERS_DB: User[]=[
     name: "Employee",
     email: "employee@gmail.com",
     password: "123456",
+    accessToken: "fdewsxc3",
     role: "EMPLOYEE"
 }
 ];
@@ -33,13 +35,21 @@ export class AuthService{
     login(payload:LoginPayload): void{
         const loginResult = FAKE_USERS_DB.find((user) => user.email === payload.email && user.password === payload.password);
         if(!loginResult){
-            alert("Email o password invaidos");
+            alert("Email o password invalidos");
             return;
         }
+        localStorage.setItem('access_token', loginResult.accessToken);
         this._authUser$.next(loginResult);
-        this.router.navigate(['dasboard', 'home'])
+        this.router.navigate(['dashboard', 'home'])
     }
     isAuthenticated(): Observable<boolean>{
+        const storegeUser = FAKE_USERS_DB.find(x => x.accessToken === localStorage.getItem('access_token'))
+        this._authUser$.next(storegeUser || null );
         return this.authUser$.pipe( map(x => !!x));
+    }
+    logout(): void {
+        localStorage.removeItem('access_token');
+        this._authUser$.next(null);
+        this.router.navigate(['auth', 'login']);
     }
 }
